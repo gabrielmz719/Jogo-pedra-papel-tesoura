@@ -9,30 +9,40 @@ function getHumanChoice() {
     return escolhaHumano.toLocaleLowerCase();
 }
 
-let humanScore = 0;
-let computerScore = 0;
-
 function playRound(humanChoice, computerChoice) {
-    humanChoice.toLocaleLowerCase();
-    computerChoice.toLocaleLowerCase();
+    humanChoice = humanChoice.toLocaleLowerCase();
+    computerChoice = computerChoice.toLocaleLowerCase();
 
-    if (computerChoice === 'tesoura' && humanChoice === 'pedra' || computerChoice === 'papel' && humanChoice === 'tesoura' || computerChoice === 'pedra' && humanChoice === 'papel') {
+    if ((computerChoice === 'tesoura' && humanChoice === 'pedra') || (computerChoice === 'papel' && humanChoice === 'tesoura') || (computerChoice === 'pedra' && humanChoice === 'papel')) {
         console.log(`Voce escolheu ${humanChoice} o computador escolheu ${computerChoice}, voce venceu`);
-        humanScore + 1;
+        humanScore ++;
     } else if (computerChoice === humanChoice) {
 
         console.log(`Voce escolheu ${humanChoice} o computador escolheu ${computerChoice}, empate`);
 
-    } else if (computerChoice === 'tesoura' && humanChoice === 'papel' || computerChoice === 'papel' && humanChoice === 'pedra' || computerChoice === 'pedra' && humanChoice === 'tesoura') {
+    } else if ((computerChoice === 'tesoura' && humanChoice === 'papel') || (computerChoice === 'papel' && humanChoice === 'pedra') || (computerChoice === 'pedra' && humanChoice === 'tesoura')) {
         console.log(`Voce escolheu ${humanChoice} o computador escolheu ${computerChoice}, voce perdeu`);
-        computerScore + 1;
+        computerScore ++;
     }
 }
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
 
 function playGame() {
-    playRound(humanSelection, computerSelection);
+    for (let i = 0; i < 5; i++) {
+        console.log(`Rodada ${i + 1}`);
+        const computerSelection = getComputerChoice();
+        const humanSelection = getHumanChoice();
+        playRound(humanSelection, computerSelection);
+    }
+    console.log('\nResultado:');
+    if(humanScore===computerScore){
+        console.log('Empate!!!');
+    }else if(humanScore > computerScore){
+        console.log('Parabéns você venceu !!!');
+    }else{
+        console.log('O compuatdor venceu!!!');
+    }
 }
+let humanScore = 0;
+let computerScore = 0;
 
 playGame();
